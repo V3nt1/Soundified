@@ -39,8 +39,9 @@ class PlaylistActivity : AppCompatActivity() {
         namePlaylist = intent.getStringExtra("name").toString()
         description = intent.getStringExtra("description").toString()
         index = intent.getIntExtra("index",0)
-        this.supportActionBar?.title =
-            Html.fromHtml("<font color=\"#FAC400\">$namePlaylist</font>")
+
+        this.supportActionBar?.title = Html.fromHtml("<font color=\"#FAC400\">$namePlaylist</font>",Html.FROM_HTML_MODE_LEGACY)
+
         val colorDrawable = ColorDrawable(Color.parseColor("#333333"))
         this.supportActionBar?.setBackgroundDrawable(colorDrawable)
         binding.tvDescription.text = description
@@ -89,7 +90,7 @@ class PlaylistActivity : AppCompatActivity() {
             initRecylerView()
         }
 
-    fun StartASong(uri: Uri?)
+    fun startASong(uri: Uri?)
     {
         if (mediaPlayer?.isPlaying == true) mediaPlayer?.stop()
             mediaPlayer = MediaPlayer.create(this, uri)

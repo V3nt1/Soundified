@@ -72,8 +72,9 @@ class FirstFragment : Fragment() {
     }
 
     private fun changeColor() {
-        (activity as? AppCompatActivity)?.supportActionBar?.title =
-            Html.fromHtml("<font color=\"#FAC400\">Playlists</font>")
+
+        (activity as? AppCompatActivity)?.supportActionBar?.title = Html.fromHtml("<font color=\"#FAC400\">Playlists</font>",Html.FROM_HTML_MODE_LEGACY)
+
         val colorDrawable = ColorDrawable(Color.parseColor("#333333"))
         (activity as? AppCompatActivity)?.supportActionBar?.setBackgroundDrawable(colorDrawable)
     }

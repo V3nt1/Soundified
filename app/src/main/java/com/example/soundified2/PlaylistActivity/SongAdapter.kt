@@ -20,7 +20,7 @@ class SongAdapter(private val list: List<Song>, val activity: PlaylistActivity):
 
             //Si le damos al boton de una cancion, hacemos que empiece a sonar
             view.findViewById<TextView>(R.id.tvNameSong).setOnClickListener{
-               activity.StartASong(song.uri)
+               activity.startASong(song.uri)
             }
         }
     }

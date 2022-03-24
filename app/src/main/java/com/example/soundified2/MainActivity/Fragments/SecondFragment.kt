@@ -42,7 +42,8 @@ class SecondFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //Seteamos el color de la letra y el fondo de la actionBar
-        (activity as? AppCompatActivity)?.supportActionBar?.title = Html.fromHtml("<font color=\"#FAC400\">Añadir nueva playlist</font>")
+
+        (activity as? AppCompatActivity)?.supportActionBar?.title = Html.fromHtml("<font color=\"#FAC400\">Añadir nueva playlist</font>",Html.FROM_HTML_MODE_LEGACY)
         val colorDrawable = ColorDrawable(Color.parseColor("#333333"))
         (activity as? AppCompatActivity)?.supportActionBar?.setBackgroundDrawable(colorDrawable)
 
@@ -75,7 +76,7 @@ class SecondFragment : Fragment() {
         super.onStart()
 
         //Setamos el color de la letra y el fondo de la actionBar
-        (activity as? AppCompatActivity)?.supportActionBar?.title = Html.fromHtml("<font color=\"#FAC400\">Añadir nueva playlist</font>")
+        (activity as? AppCompatActivity)?.supportActionBar?.title = Html.fromHtml("<font color=\"#FAC400\">Añadir nueva playlist</font>",Html.FROM_HTML_MODE_LEGACY)
         val colorDrawable = ColorDrawable(Color.parseColor("#333333"))
         (activity as? AppCompatActivity)?.supportActionBar?.setBackgroundDrawable(colorDrawable)
     }
