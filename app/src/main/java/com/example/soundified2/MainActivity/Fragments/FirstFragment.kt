@@ -21,7 +21,7 @@ import com.example.soundified2.databinding.FragmentFirstBinding
  */
 class FirstFragment : Fragment() {
 
-    lateinit var _binding: FragmentFirstBinding
+    private lateinit var _binding: FragmentFirstBinding
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -30,7 +30,7 @@ class FirstFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
         return binding.root
@@ -56,7 +56,7 @@ class FirstFragment : Fragment() {
         super.onResume()
         initRecylerView()
     }
-    fun initRecylerView(){
+    private fun initRecylerView(){
         val recyclerView = _binding.recyclerView
 
         //Le asignamos a adapter la vista que queremos que se cree para que se muestre nuestra
@@ -78,8 +78,4 @@ class FirstFragment : Fragment() {
         (activity as? AppCompatActivity)?.supportActionBar?.setBackgroundDrawable(colorDrawable)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-
-    }
 }

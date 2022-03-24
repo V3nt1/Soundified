@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.soundified2.PlaylistActivity.PlaylistActivity
 import com.example.soundified2.R
 
-class PlaylistAdapter(val list: List<Playlist>):RecyclerView.Adapter<PlaylistAdapter.PlaylistHolder>() {
+class PlaylistAdapter(private val list: List<Playlist>):RecyclerView.Adapter<PlaylistAdapter.PlaylistHolder>() {
 
-    inner class PlaylistHolder(val view:View):RecyclerView.ViewHolder(view){
+    inner class PlaylistHolder(private val view:View):RecyclerView.ViewHolder(view){
         fun render(playlist: Playlist){
             //Se le setea el texto de la playlist en la lista de playlists al de
             //la playlist enviada.

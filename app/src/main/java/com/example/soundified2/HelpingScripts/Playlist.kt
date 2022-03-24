@@ -5,5 +5,5 @@ data class Playlist(
     val description: String,
     val index: Int = -1,
 
-    var songList: MutableList<Song> = mutableListOf<Song>()
+    var songList: MutableList<Song> = mutableListOf()
 )
