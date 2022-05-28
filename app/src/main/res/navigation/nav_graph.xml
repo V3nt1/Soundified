@@ -25,4 +25,8 @@
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/editSongBottomSheet"
+        android:name="com.example.soundified2.EditSongBottomSheet"
+        android:label="EditSongBottomSheet" />
 </navigation>
