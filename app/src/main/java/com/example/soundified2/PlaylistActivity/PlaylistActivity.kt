@@ -98,7 +98,6 @@ class PlaylistActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-
         super.onDestroy()
         mediaPlayer?.stop()
         mediaPlayer?.release()

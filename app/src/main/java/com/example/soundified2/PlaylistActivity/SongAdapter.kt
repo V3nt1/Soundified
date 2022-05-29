@@ -24,6 +24,10 @@ class SongAdapter(private val list: List<Song>, val activity: PlaylistActivity) 
             val binding = ItemSongBinding.bind(view)
             binding.tvNameSong.text = song.name
 
+            binding.tvNameSong.setOnClickListener{
+                activity.startASong(song.uri)
+            }
+
             binding.editButton.setOnClickListener {
                 val btnsheet = activity.layoutInflater.inflate(R.layout.bottom_sheet_edit_song, null)
                 val dialog = BottomSheetDialog(activity)
