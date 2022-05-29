@@ -61,7 +61,7 @@ class FirstFragment : Fragment() {
 
         //Le asignamos a adapter la vista que queremos que se cree para que se muestre nuestra
         //lista de playlists.
-        val adapter = PlaylistAdapter(PlaylistData.list)
+        val adapter = PlaylistAdapter(PlaylistData.list,requireActivity())
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this.requireContext())
     }
