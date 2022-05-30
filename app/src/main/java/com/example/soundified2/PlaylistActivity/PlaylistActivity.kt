@@ -1,12 +1,14 @@
 package com.example.soundified2.PlaylistActivity
 
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
@@ -24,7 +26,6 @@ class PlaylistActivity : AppCompatActivity() {
 
     private lateinit var namePlaylist: String
     private lateinit var description: String
-    private var mediaPlayer: MediaPlayer? = null
     private var audio: AudioManager? = null
     private var index: Int = 0
 
@@ -62,18 +63,10 @@ class PlaylistActivity : AppCompatActivity() {
             openDocumentLauncher.launch(arrayOf("audio/*"))
         }
 
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                android.Manifest.permission.READ_EXTERNAL_STORAGE
-            ) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(
-                    android.Manifest.permission.READ_EXTERNAL_STORAGE,
-                ),
-                111
-            )
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE,), 111)
+
         }
     }
 
@@ -103,19 +96,20 @@ class PlaylistActivity : AppCompatActivity() {
             initRecylerView()
         }
 
-    fun startASong(uri: Uri?)
-    {
-        if (mediaPlayer?.isPlaying == true)
-        {
-            mediaPlayer?.stop()
-        }
-        mediaPlayer = MediaPlayer.create(this, uri)
-        mediaPlayer?.start()
-    }
 
-    override fun onPause() {
-        super.onPause()
-        mediaPlayer?.stop()
-        mediaPlayer?.release()
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode == RESULT_OK) {
+            val sourceTreeUri = data?.data
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                sourceTreeUri?.let {
+                    this.getContentResolver().takePersistableUriPermission(
+                        it,
+                        Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+                    )
+                }
+            }
+        }
     }
 }
