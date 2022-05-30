@@ -1,6 +1,7 @@
 package com.example.soundified2.PlaylistActivity
 
 import android.content.Context
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.media.AudioManager
@@ -10,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
 import androidx.documentfile.provider.DocumentFile
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.soundified2.HelpingScripts.Playlist
@@ -28,7 +30,6 @@ class PlaylistActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
 
         binding = ActivityPlaylistBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -61,6 +62,19 @@ class PlaylistActivity : AppCompatActivity() {
             openDocumentLauncher.launch(arrayOf("audio/*"))
         }
 
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.READ_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(
+                    android.Manifest.permission.READ_EXTERNAL_STORAGE,
+                ),
+                111
+            )
+        }
     }
 
     private fun initRecylerView(){
@@ -86,19 +100,21 @@ class PlaylistActivity : AppCompatActivity() {
             val playlist = Playlist(namePlaylist, description, index, tmpSongList)
             PlaylistData.list[index] = playlist
 
-
             initRecylerView()
         }
 
     fun startASong(uri: Uri?)
     {
-        if (mediaPlayer?.isPlaying == true) mediaPlayer?.stop()
-            mediaPlayer = MediaPlayer.create(this, uri)
-            mediaPlayer?.start()
+        if (mediaPlayer?.isPlaying == true)
+        {
+            mediaPlayer?.stop()
+        }
+        mediaPlayer = MediaPlayer.create(this, uri)
+        mediaPlayer?.start()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onPause() {
+        super.onPause()
         mediaPlayer?.stop()
         mediaPlayer?.release()
     }

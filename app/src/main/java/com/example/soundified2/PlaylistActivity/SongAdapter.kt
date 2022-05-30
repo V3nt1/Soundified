@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.recyclerview.widget.RecyclerView
+import com.example.soundified2.HelpingScripts.MediaPlayerManager
 import com.example.soundified2.HelpingScripts.Song
 import com.example.soundified2.R
 import com.example.soundified2.databinding.ActivityMainBinding.inflate
@@ -25,7 +26,7 @@ class SongAdapter(private val list: List<Song>, val activity: PlaylistActivity) 
             binding.tvNameSong.text = song.name
 
             binding.tvNameSong.setOnClickListener{
-                activity.startASong(song.uri)
+                MediaPlayerManager.playMediaPlayer(activity,song.uri)
             }
 
             binding.editButton.setOnClickListener {
@@ -44,9 +45,7 @@ class SongAdapter(private val list: List<Song>, val activity: PlaylistActivity) 
                     notifyDataSetChanged()
                 }
             }
-
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SongHolder {
